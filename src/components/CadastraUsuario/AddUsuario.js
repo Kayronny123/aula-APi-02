@@ -1,21 +1,31 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { InputCadastro, ContainerCadastro } from './style'
+import { InputCadastro, ContainerCadastro } from "./style";
 
 function AddUsuario(props) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
 
-  const postNovoUsuario = async()=>{
-try {
-const url = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users",
-const headers = {
-  headers:{
-    Authorization: "ana-sammi-barbosa"
+const postNovoUsuario = async()=>{
+ const url = `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users`
+ const headers ={
+   headers:{
+     Authorization: 'ana-sammi-barbosa'
+   }
+ }
+ const body = {
+   name: nome,
+   email
+ }
+  try {
+    const resposta = await axios.post(url,body, headers)
+    console.log(resposta)
+  } catch (error) {
+    console.log(error)
   }
 }
-}catch(erro){
-}
+
+
   // const postNovoUsuario = () => {
   //   const body = {
   //     name: nome,
