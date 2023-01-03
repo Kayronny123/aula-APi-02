@@ -81,25 +81,39 @@ export const EditarUsuario = (props) => {
   //       });
   // }
 
-  const deletarUsuario = () => {
-    axios
-      .delete(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${usuario.id}`,
-        {
-          headers: {
-            Authorization: "ana-sammi-barbosa"
-          }
-        }
-      )
-      .then(() => {
-        alert("usuario removido");
-        // chama de novo o get usuarios pra atualizar a lista
-        props.getUsuarios();
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+  const deletarUsuario = async () => {
+    const url = `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${usuario.id}`;
+    const headers = {
+      headers: {
+        Authorization: "ana-sammi-barbosa"
+      }
+    };
+    try {
+      const resposta = await axios.delete(url, headers);
+      console.log(resposta);
+    } catch (error) {
+      console.log(error);
+    }
   };
+  // const deletarUsuario = () => {
+  //   axios
+  //     .delete(
+  //       `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${usuario.id}`,
+  //       {
+  //         headers: {
+  //           Authorization: "ana-sammi-barbosa"
+  //         }
+  //       }
+  //     )
+  //     .then(() => {
+  //       alert("usuario removido");
+  //       // chama de novo o get usuarios pra atualizar a lista
+  //       props.getUsuarios();
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.response);
+  //     });
+  // };
 
   return (
     <MainContainer>
